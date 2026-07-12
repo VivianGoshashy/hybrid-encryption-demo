@@ -15,7 +15,6 @@ A practical demonstration of **hybrid encryption** combining symmetric (AES/Fern
 - [Overview](#-overview)
 - [Why Hybrid Encryption?](#-why-hybrid-encryption)
 - [How It Works](#-how-it-works)
-- [Visual Workflow](#-visual-workflow)
 - [Installation](#-installation)
 - [Usage](#-usage)
 - [Directory Structure](#-directory-structure)
@@ -81,5 +80,3 @@ This project demonstrates the **hybrid encryption** approach used in real-world 
 3. Verify integrity with SHA-256 hashing
 
 ---
-
-## 🎨 Visual Workflow
