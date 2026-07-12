@@ -79,37 +79,47 @@ encrypted_key_path = base_dir / "aes_key.secure" # creates a file path for stori
 encrypted_key_path.write_bytes(encrypted_aes_key) # saves the encrypted AES key to a file
 
 # Recover AES key using RSA private key
-recovered_aes_key = private_key.decrypt(
-    encrypted_aes_key,
+recovered_aes_key = private_key.decrypt( # uses the RSA private key to decrypt
+    encrypted_aes_key, # The RSA-encrypted AES key
     padding.OAEP(
         mgf=padding.MGF1(algorithm=hashes.SHA256()),
         algorithm=hashes.SHA256(),
         label=None
     )
-)
+) # 
 
 # For the legal team to read the report, they need correct key.
-recovered_cipher = Fernet(recovered_aes_key)
-decrypt_report = recovered_cipher.decrypt(encrypted_report)
+recovered_cipher = Fernet(recovered_aes_key) # creates a Fernet cipher using the recovered AES key
+decrypt_report = recovered_cipher.decrypt(encrypted_report) # Decrypts the encrypted report
 
-decrypt_report_path = base_dir / "finance_report_recovered.txt"
-decrypt_report_path.write_bytes(decrypt_report)
+decrypt_report_path = base_dir / "finance_report_recovered.txt" # creates a path
+decrypt_report_path.write_bytes(decrypt_report) # saves the decrpted data to file
 
 print(decrypt_report.decode())
 
 # Validating report integrity
-original_hash = hashlib.sha256(original_data).hexdigest()
-recovered_hash = hashlib.sha256(decrypt_report).hexdigest()
+original_hash = hashlib.sha256(original_data).hexdigest() # creates a SHA-256 hash of the original report
+recovered_hash = hashlib.sha256(decrypt_report).hexdigest() # creates a SHA-256 hash of the decrypted report
 
+# Create comparison table
 validation = [
     ["Original Report Hash", original_hash],
-    ["Recovered Report Hash", recovered_hash]
+    ["Recovered Report Hash", recovered_hash],
+    ["Hash Match?", "YES" if original_hash == recovered_hash else "NO"]
 ]
 
 
-
+# displays the hash in a tabular form
 print(tabulate(
     validation,
     headers=["Artifact", "SHA-256 Hash"],
     tablefmt = "grid"
 ))
+
+if original_hash == recovered_hash:
+    print("\n SUCCESS: Report integrity verified!")
+    print(" The report was NOT tampered with during encryption/decryption.")
+    print(" Legal team can trust this document")
+else:
+    print("\n FAILURE: Report integrity compromised!")
+    print(" The report may have been altered or corrupted.")
