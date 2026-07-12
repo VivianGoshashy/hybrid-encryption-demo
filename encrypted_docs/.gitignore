@@ -1,0 +1,43 @@
+# Virtual Environment
+venv/
+env/
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Encryption keys and sensitive data
+encrypted_docs/keys/
+encrypted_docs/processed/
+*.key
+*.secure
+*.encrypted
+
+# Sensitive files
+finance_report_recovered.txt
+encrypted_docs/incoming/*.txt
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Distribution/packaging
+*.egg-info/
+dist/
+build/
+
+# Logs
+*.log
+
+# Environment variables
+.env
