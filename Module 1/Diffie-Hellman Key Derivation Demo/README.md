@@ -108,9 +108,8 @@ $$s = B^a \mod p$$
 
 Since $B = g^b \mod p$:
 
-$$s = (g^b)^a \mod p$$
+$$s = b^a \mod p$$
 
-$$s = g^{ab} \mod p$$
 
 **Bob computes:**
 
@@ -118,45 +117,38 @@ $$s = A^b \mod p$$
 
 Since $A = g^a \mod p$:
 
-$$s = (g^a)^b \mod p$$
+$$s = a^b \mod p$$
 
-$$s = g^{ab} \mod p$$
-
-### Step 5: Result
-
-Both parties now have the same shared secret:
-
-$$s = g^{ab} \mod p$$
 
 ### Example with Small Numbers
 
 Let's trace through a concrete example:
 
 **Public Parameters:**
-- Prime modulus: $p = 23$
-- Generator: $g = 5$
+- Prime modulus: $p = 19$
+- Generator: $g = 2$
 
 **Alice's Keys:**
-- Private key: $a = 6$
-- Public key: $A = 5^6 \mod 23 = 8$
+- Private key: $a = 8$
+- Public key: $A = 2^8 \mod 19 = 9$
 
 **Bob's Keys:**
 - Private key: $b = 15$
-- Public key: $B = 5^{15} \mod 23 = 19$
+- Public key: $B = 2^{15} \mod 19 = 19$
 
 **Key Exchange:**
-- Alice sends $A = 8$ to Bob
-- Bob sends $B = 19$ to Alice
+- Alice sends $A = 9$ to Bob
+- Bob sends $B = 12$ to Alice
 
 **Shared Secret Derivation:**
 
 Alice computes:
-$$s = B^a \mod p = 19^6 \mod 23 = 2$$
+$$s = B^a \mod p = 12^8 \mod 19 = 11$$
 
 Bob computes:
-$$s = A^b \mod p = 8^{15} \mod 23 = 2$$
+$$s = A^b \mod p = 9^{15} \mod 19 = 11$$
 
-**Result:** Both parties derive $s = 2$ ✓
+**Result:** Both parties derive $s = 11$ ✓
 
 ---
 
@@ -187,11 +179,11 @@ $$a = \log_g(A) \mod p$$
 
 | Key Size | Security Level | Status |
 |----------|---------------|--------|
-| 512-bit | 40-bit | ❌ Broken |
-| 1024-bit | 80-bit | ❌ Weak |
-| **2048-bit** | **112-bit** | **✅ Secure** |
-| 3072-bit | 128-bit | ✅ Strong |
-| 4096-bit | 128-bit+ | ✅ Very Strong |
+| 512-bit | 40-bit | Broken |
+| 1024-bit | 80-bit | Weak |
+| **2048-bit** | **112-bit** | **Secure** |
+| 3072-bit | 128-bit | Strong |
+| 4096-bit | 128-bit+ | Very Strong |
 
 ### Mathematical Explanation
 
