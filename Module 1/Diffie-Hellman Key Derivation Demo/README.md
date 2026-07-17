@@ -108,8 +108,9 @@ $$s = B^a \mod p$$
 
 Since $B = g^b \mod p$:
 
-$$s = b^a \mod p$$
+$$s = (g^b)^a \mod p$$
 
+$$s = g^{ab} \mod p$$
 
 **Bob computes:**
 
@@ -117,8 +118,15 @@ $$s = A^b \mod p$$
 
 Since $A = g^a \mod p$:
 
-$$s = a^b \mod p$$
+$$s = (g^a)^b \mod p$$
 
+$$s = g^{ab} \mod p$$
+
+### Step 5: Result
+
+Both parties now have the same shared secret:
+
+$$s = g^{ab} \mod p$$
 
 ### Example with Small Numbers
 
